@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+	<table>
+		<tr>
+			<th>NAME</th> 
+			<th>PRICE</th>
+			<th>ACTION</th>
+		</tr>
+		<tr th:each="order : ${orders}">
+			<td th:text="${order.description}">Onions</td>
+			<td th:text="${order.cost}">2.41</td>
+			<td></td>
+		</tr>
+		<tr>
+			<form action="orders" method="POST">
+				<td><input type="text" name="description" /></td>
+				<td><input type="text" name="cost" /></td>
+				<td><input type="submit" value="Add" /></td>
+			</form>
+		</tr>
+	</table>
+</body>
+</html>
