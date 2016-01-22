@@ -35,6 +35,7 @@ public class OrderController {
 
     @RequestMapping(value="/orders", method=POST)
     public String create(Model model, Order order) {
+    	LOGGER.info("Creating new Order: {}", order);
     	order.setPayment(new Payment());
     	orderRepo.add(order);
     	return "redirect:/orders";
