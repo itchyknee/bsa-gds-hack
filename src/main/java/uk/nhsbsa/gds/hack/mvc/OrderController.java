@@ -29,7 +29,7 @@ public class OrderController {
     @RequestMapping("/orders")
     public String list(Model model) {
     	List<Order> orders = orderRepo.findAll();
-    	model.addAttribute("orders", orders);
+    	model.addAttribute("orders", orders); 
         return "orderList";
     }
 

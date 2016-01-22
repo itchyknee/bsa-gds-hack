@@ -19,6 +19,11 @@ public abstract class InMemoryRepository <T, I> implements IRepository<T, I> {
 		entities.put(identify(entity), entity);
 	}
 
+	@Override
+	public T find(I id) {
+		return entities.get(id);
+	}
+	
 	protected abstract I identify(T entity);
 	
 }

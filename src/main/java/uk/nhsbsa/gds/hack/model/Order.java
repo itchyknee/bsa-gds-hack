@@ -67,6 +67,9 @@ public class Order {
 	public String getPaymentStatus() {
 		return payment.getStatus().toString();
 	}
+	public void setPaymentStatus(String status) {
+		payment.setStatus(PaymentStatus.valueOf(status));
+	}
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", payment=" + payment + ", description=" + description + ", cost=" + cost + "]";

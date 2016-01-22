@@ -6,6 +6,8 @@ public interface IRepository <T, I> {
 
 	List<T> findAll();
 
+	T find(I id);
+
 	void add(T entity);
 
 	

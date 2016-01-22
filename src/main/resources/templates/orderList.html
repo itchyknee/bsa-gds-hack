@@ -25,13 +25,13 @@
 					<div class="td" th:text="${order.cost}">2</div>
 
 					<!--/* show buttons according to payment status */-->
-					<div class="td action" th:switch="${order.paymentStatus}">
+					<div class="td action" >
 						<input type="hidden" name="id" th:value="${order.id}" />
-						<button type="submit" name="target" value="pay" th:case="'PENDING'">Pay</button>
-						<button type="submit" name="target" value="approve" th:case="'SUBMITTED'">Approve</button>
-						<button type="submit" name="target" value="reject" th:case="'SUBMITTED'">Reject</button>
-						<span th:case="'APPROVED'">Approved</span>
-						<span th:case="'REJECTED'">Rejected</span>
+						<button type="submit" name="target" value="pay" th:if="${order.paymentStatus == 'PENDING'}">Pay</button>
+						<button type="submit" name="target" value="approve" th:if="${order.paymentStatus == 'SUBMITTED'}">Approve</button>
+						<button type="submit" name="target" value="reject" th:if="${order.paymentStatus == 'SUBMITTED'}">Reject</button>
+						<span th:if="${order.paymentStatus == 'APPROVED'}">Approved</span>
+						<span th:if="${order.paymentStatus == 'REJECTED'}">Rejected</span>
 					</div>
 				</form>
 				<!--/* create new payment */-->
