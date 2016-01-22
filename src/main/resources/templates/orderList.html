@@ -3,27 +3,51 @@
 <head>
 <title>Getting Started: Serving Web Content</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/style.css}" href="css/style.css" />
 </head>
 <body>
+	<div class="ctr">
+		<h1>Orders</h1>
+		<div class="table">
+			<div class="thead">
+				<div class="tr">
+					<div class="td">Name</div>
+					<div class="td">Cost</div>
+					<div class="td">Action</div>
+				</div>
+			</div>
+			<div class="tbody">
+				<!--/* existing payments state transition */-->
+				<form class="tr" method="POST" th:action="@{/orders/transition}"
+					th:each="order : ${orders}">
+					<div class="td" th:text="${order.description}">1</div>
+					<div class="td" th:text="${order.cost}">2</div>
 
-	<table>
-		<tr>
-			<th>NAME</th> 
-			<th>PRICE</th>
-			<th>ACTION</th>
-		</tr>
-		<tr th:each="order : ${orders}">
-			<td th:text="${order.description}">Onions</td>
-			<td th:text="${order.cost}">2.41</td>
-			<td></td>
-		</tr>
-		<tr>
-			<form action="orders" method="POST">
-				<td><input type="text" name="description" /></td>
-				<td><input type="text" name="cost" /></td>
-				<td><input type="submit" value="Add" /></td>
-			</form>
-		</tr>
-	</table>
+					<!--/* show buttons according to payment status */-->
+					<div class="td action" th:switch="${order.paymentStatus}">
+						<input type="hidden" name="id" th:value="${order.id}" />
+						<button type="submit" name="target" value="pay" th:case="'PENDING'">Pay</button>
+						<button type="submit" name="target" value="approve" th:case="'SUBMITTED'">Approve</button>
+						<button type="submit" name="target" value="reject" th:case="'SUBMITTED'">Reject</button>
+						<span th:case="'APPROVED'">Approved</span>
+						<span th:case="'REJECTED'">Rejected</span>
+					</div>
+				</form>
+				<!--/* create new payment */-->
+				<form class="tr" method="POST" th:action="@{/orders}">
+					<div class="td">
+						<input type="text" name="description" />
+					</div>
+					<div class="td">
+						<input type="text" name="cost" />
+					</div>
+					<div class="td action">
+						<input type="submit" value="Add" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

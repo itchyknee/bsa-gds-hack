@@ -4,12 +4,15 @@ package uk.nhsbsa.gds.hack.model;
 
 public class Order {
 
+	/**
+	 * Unique ID for this order.
+	 */
     private String id;
 
     /**
      * Key to GOV.UK payment.
      */
-    private String paymentId;
+    private Payment payment;
     
     /**
      * You can buy anything you want - just describe it.
@@ -38,14 +41,6 @@ public class Order {
 		this.id = id;
 	}
 
-	public String getPaymentId() {
-		return paymentId;
-	}
-
-	public void setPaymentId(String paymentId) {
-		this.paymentId = paymentId;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -60,6 +55,21 @@ public class Order {
 
 	public void setCost(Integer cost) {
 		this.cost = cost;
+	}
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+	public String getPaymentStatus() {
+		return payment.getStatus().toString();
+	}
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", payment=" + payment + ", description=" + description + ", cost=" + cost + "]";
 	}
 
 }

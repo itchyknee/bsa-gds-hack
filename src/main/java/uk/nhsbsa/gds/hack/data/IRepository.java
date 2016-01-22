@@ -1,0 +1,12 @@
+package uk.nhsbsa.gds.hack.data;
+
+import java.util.List;
+
+public interface IRepository <T, I> {
+
+	List<T> findAll();
+
+	void add(T entity);
+
+	
+}

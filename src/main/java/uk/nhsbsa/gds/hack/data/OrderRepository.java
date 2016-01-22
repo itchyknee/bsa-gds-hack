@@ -1,8 +1,6 @@
 package uk.nhsbsa.gds.hack.data;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -10,21 +8,22 @@ import org.springframework.stereotype.Repository;
 
 import uk.nhsbsa.gds.hack.model.Order;
 
+/**
+ * Stub in-memory persistence.
+ * @author pattu
+ *
+ */
 @Repository
-public class OrderRepository implements IOrderRepository {
+public class OrderRepository extends InMemoryRepository<Order, String> {
 
 	Map<String, Order> orders = new LinkedHashMap<String, Order>();
+
+	@Override
+	protected String identify(Order entity) {
+		if (entity.getId() == null) {
+			entity.setId(UUID.randomUUID().toString());
+		}
+		return entity.getId();
+	}
 	
-	@Override
-	public List<Order> findAll() {
-		return new ArrayList<Order>(orders.values());
-	}
-
-	@Override
-	public void add(Order order) {
-
-		order.setId(UUID.randomUUID().toString());
-		orders.put(order.getId(), order);
-	}
-
 }
