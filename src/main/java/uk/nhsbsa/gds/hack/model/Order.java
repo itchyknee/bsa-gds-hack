@@ -26,6 +26,9 @@ public class 	Order {
      */
     private BigDecimal cost;
     
+    /**
+     * Status of the order.
+     */
     private OrderStatus status = PENDING;
 
 	public Order() {
