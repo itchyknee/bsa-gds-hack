@@ -1,5 +1,7 @@
 package uk.nhsbsa.gds.hack.model;
 
+import org.springframework.hateoas.ResourceSupport;
+
 import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -7,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PaymentRequest {
+public class PaymentRequest extends ResourceSupport{
 
     @JsonProperty("return_url")
 	private String returnURL;
