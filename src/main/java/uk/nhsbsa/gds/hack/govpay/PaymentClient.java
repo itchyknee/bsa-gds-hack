@@ -14,19 +14,17 @@ public class PaymentClient {
 
 	private static String URL = "https://publicapi-integration-1.pymnt.uk/v1/";
 	
-    @Autowired
-    HttpComponentsClientHttpRequestFactory factory;
 
     public Payment getById(String paymentId) {
     	
-    	RestTemplate rest = new RestTemplate(factory);
-    	rest.getForObject("https://", Map.class);
+    	RestTemplate rest = new RestTemplate();
+    	rest.getForObject(URL + "payments/" + paymentId, Map.class);
     	return null;
     }
     
     public Payment create(Payment payment) {
     	
-    	RestTemplate rest = new RestTemplate(factory);
+    	RestTemplate rest = new RestTemplate();
     	Payment result = rest.postForObject(URL + "payments", payment, Payment.class);
     	return null;
     }
