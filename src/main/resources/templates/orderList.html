@@ -27,11 +27,11 @@
 					<!--/* show buttons according to payment status */-->
 					<div class="td action" >
 						<input type="hidden" name="id" th:value="${order.id}" />
-						<button type="submit" name="target" value="pay" th:if="${order.status == 'PENDING'}">Pay</button>
-						<button type="submit" name="target" value="approve" th:if="${order.status == 'SUBMITTED'}">Approve</button>
-						<button type="submit" name="target" value="reject" th:if="${order.status == 'SUBMITTED'}">Reject</button>
-						<span th:if="${order.status == 'APPROVED'}">Approved</span>
-						<span th:if="${order.status == 'REJECTED'}">Rejected</span>
+						<button type="submit" name="target" value="pay" th:if="${order.status == T(uk.nhsbsa.gds.hack.model.OrderStatus).PENDING}">Pay</button>
+						<button type="submit" name="target" value="approve" th:if="${order.status == T(uk.nhsbsa.gds.hack.model.OrderStatus).SUBMITTED}">Approve</button>
+						<button type="submit" name="target" value="reject" th:if="${order.status == T(uk.nhsbsa.gds.hack.model.OrderStatus).SUBMITTED}">Reject</button>
+						<span th:if="${order.status == T(uk.nhsbsa.gds.hack.model.OrderStatus).APPROVED}">Approved</span>
+						<span th:if="${order.status == T(uk.nhsbsa.gds.hack.model.OrderStatus).REJECTED}">Rejected</span>
 					</div>
 				</form>
 				<!--/* create new payment */-->
