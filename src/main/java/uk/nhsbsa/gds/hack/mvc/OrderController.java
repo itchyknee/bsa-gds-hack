@@ -37,7 +37,7 @@ public class OrderController {
     public String get(Model model, @PathVariable String id) {
     	Order order = orderRepo.find(id);
     	orderService.update(order);
-        return "redirect:orders";
+        return "redirect:/orders";
     }
 
     @RequestMapping("/orders")
