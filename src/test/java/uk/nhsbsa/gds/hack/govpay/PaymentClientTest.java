@@ -63,7 +63,6 @@ public class PaymentClientTest {
 	
 	private PaymentRequest getTestPaymentRequest() {
 		PaymentRequest paymentRequest = new PaymentRequest();
-		//paymentRequest.setId("unit1");
 		paymentRequest.setAmount(new BigDecimal(100).setScale(0, RoundingMode.HALF_UP));
 		paymentRequest.setAccountId(789);
 		paymentRequest.setDescription("Unit test");
