@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class GovpayConfig {
 
-	@Value("bearerToken:1557c300-0305-472d-9630-c970a35eaf8c")
+	@Value("${bearerToken:1557c300-0305-472d-9630-c970a35eaf8c}")
 	private String bearerToken;
 	
 	@Bean
@@ -27,6 +27,7 @@ public class GovpayConfig {
 		HttpHeaders headers = new HttpHeaders();
 		auth(headers);
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		headers.setContentType(MediaType.APPLICATION_JSON);
 		return headers;
 	}
 
