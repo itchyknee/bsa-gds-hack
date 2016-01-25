@@ -40,6 +40,10 @@ public class OrderService implements IOrderService {
 	}
 
 	private OrderStatus getStatus(String status) {
-		return OrderStatus.APPROVED;
+		
+		if ("SUCCEEDED".equals(status)) {
+			return OrderStatus.APPROVED;
+		}
+		return OrderStatus.REJECTED;
 	}
 }
