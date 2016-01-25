@@ -1,6 +1,6 @@
 package uk.nhsbsa.gds.hack.model;
 
-
+import java.math.BigDecimal;
 
 public class Order {
 
@@ -20,14 +20,14 @@ public class Order {
     private String description;
     
 	/**
-     * You can say how much you want to pay
+     * You can say how much you want to pay.
      */
-    private Integer cost;
+    private BigDecimal cost;
 
 	public Order() {
 	}
 
-    public Order(String description, Integer cost) {
+    public Order(String description, BigDecimal cost) {
 		super();
 		this.description = description;
 		this.cost = cost;
@@ -49,11 +49,11 @@ public class Order {
 		this.description = description;
 	}
 
-	public Integer getCost() {
+	public BigDecimal getCost() {
 		return cost;
 	}
 
-	public void setCost(Integer cost) {
+	public void setCost(BigDecimal cost) {
 		this.cost = cost;
 	}
 
