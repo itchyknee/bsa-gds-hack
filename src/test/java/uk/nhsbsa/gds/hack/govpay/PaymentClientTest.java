@@ -5,12 +5,18 @@ package uk.nhsbsa.gds.hack.govpay;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Random;
+
+import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import uk.nhsbsa.gds.hack.conf.TestConfiguration;
-import uk.nhsbsa.gds.hack.model.Payment;
+import uk.nhsbsa.gds.hack.model.PaymentRequest;
+import uk.nhsbsa.gds.hack.model.PaymentResponse;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,16 +33,22 @@ public class PaymentClientTest {
 
 	@Autowired
 	private PaymentClient paymentClient;
+ 	
+	private Random random;
+	
+	@Before
+	public void setUp()
+	{
+		random = new Random(System.currentTimeMillis());
+	}
 	
 	/**
 	 * Test method for {@link uk.nhsbsa.gds.hack.govpay.PaymentClient#getById(java.lang.String)}.
 	 */
 	@Test
 	public void testGetById() {
-		Payment payment = paymentClient.getById("108");
-		assertNotNull(payment);
-		
-		assertEquals("108", payment.getId());
+		PaymentResponse paymentResponse = paymentClient.getById("108");
+		assertNotNull(paymentResponse);
 	}
 
 	/**
@@ -44,10 +56,20 @@ public class PaymentClientTest {
 	 */
 	@Test
 	public void testCreate() {
-		Payment payment = new Payment();
-		payment.setId("unit1");
-		
-		Payment paymentCreated = paymentClient.create(payment);
-		assertNotNull(paymentCreated);
+		PaymentRequest paymentRequest = getTestPaymentRequest();
+		PaymentResponse paymentResponse = paymentClient.create(paymentRequest);
+		assertNotNull(paymentResponse);
+	}
+	
+	private PaymentRequest getTestPaymentRequest() {
+		PaymentRequest paymentRequest = new PaymentRequest();
+		//paymentRequest.setId("unit1");
+		paymentRequest.setAmount(new BigDecimal(100).setScale(0, RoundingMode.HALF_UP));
+		paymentRequest.setAccountId(789);
+		paymentRequest.setDescription("Unit test");
+		paymentRequest.setReference("TEST"+random.nextInt(9999));
+		paymentRequest.setReturnURL("http://unittest.org.uk/something");
+			
+		return paymentRequest;
 	}
 }
