@@ -7,7 +7,8 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import uk.nhsbsa.gds.hack.model.Payment;
+import uk.nhsbsa.gds.hack.model.PaymentRequest;
+import uk.nhsbsa.gds.hack.model.PaymentResponse;
 
 @Component
 public class PaymentClient {
@@ -17,17 +18,17 @@ public class PaymentClient {
     @Autowired
     HttpComponentsClientHttpRequestFactory factory;
 
-    public Payment getById(String paymentId) {
+    public PaymentResponse getById(String paymentId) {
     	
     	RestTemplate rest = new RestTemplate(factory);
     	rest.getForObject("https://", Map.class);
     	return null;
     }
     
-    public Payment create(Payment payment) {
+    public PaymentResponse create(PaymentRequest payment) {
     	
     	RestTemplate rest = new RestTemplate(factory);
-    	Payment result = rest.postForObject(URL + "payments", payment, Payment.class);
+    	PaymentResponse result = rest.postForObject(URL + "payments", payment, PaymentResponse.class);
     	return null;
     }
     
