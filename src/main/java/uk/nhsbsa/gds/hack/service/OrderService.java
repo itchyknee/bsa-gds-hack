@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import uk.nhsbsa.gds.hack.govpay.PaymentClient;
 import uk.nhsbsa.gds.hack.model.Order;
+import uk.nhsbsa.gds.hack.model.Payment;
 
 @Component
 public class OrderService implements IOrderService {
@@ -14,6 +15,8 @@ public class OrderService implements IOrderService {
 	
 	public void pay(Order order) {
 		
-		
+		Payment payment = new Payment();
+		//TODO populate initial Payment object
+		paymentClient.create(payment);
 	}
 }

@@ -1,5 +1,7 @@
 package uk.nhsbsa.gds.hack.model;
 
+import static uk.nhsbsa.gds.hack.model.OrderStatus.PENDING;
+
 import java.math.BigDecimal;
 
 public class Order {
@@ -23,6 +25,8 @@ public class Order {
      * You can say how much you want to pay.
      */
     private BigDecimal cost;
+    
+    private OrderStatus status = PENDING;
 
 	public Order() {
 	}
@@ -57,19 +61,16 @@ public class Order {
 		this.cost = cost;
 	}
 
-	public Payment getPayment() {
-		return payment;
+	public OrderStatus getStatus() {
+		return status;
 	}
 
-	public void setPayment(Payment payment) {
-		this.payment = payment;
+	public void setStatus(OrderStatus status) {
+		this.status = status;
 	}
-	public String getPaymentStatus() {
-		return payment.getStatus().toString();
-	}
-	public void setPaymentStatus(String status) {
-		payment.setStatus(PaymentStatus.valueOf(status));
-	}
+	
+	
+
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", payment=" + payment + ", description=" + description + ", cost=" + cost + "]";
