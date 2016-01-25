@@ -24,6 +24,9 @@ import org.junit.runner.RunWith;
 /**
  * Test cases to prove PaymentClient.
  * 
+ * Make sure the VM args for Java 1.7 "-Dhttps.protocols=TLSv1.1,TLSv1.2"
+ * Can also override the default API token with the VM arg "-DbearerToken=[your API key]"
+ * 
  * @author gary
  *
  */
