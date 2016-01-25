@@ -1,12 +1,14 @@
 package uk.nhsbsa.gds.hack.model;
 
+import org.springframework.hateoas.ResourceSupport;
+
 import java.math.BigDecimal;
 
 import static uk.nhsbsa.gds.hack.model.PaymentStatus.PENDING;
 
 
 
-public class PaymentRequest {
+public class PaymentRequest extends ResourceSupport{
 
     private String id;
 
@@ -22,14 +24,6 @@ public class PaymentRequest {
 
     public PaymentRequest() {
     }
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getReturnURL() {
 		return returnURL;
