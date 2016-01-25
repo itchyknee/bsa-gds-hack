@@ -27,6 +27,7 @@ public class PaymentResponse extends ResourceSupport {
 	
 	private String status;
 
+    @JsonProperty("payment_id")
     private Integer paymentId;
 
 	public String getStatus() {
