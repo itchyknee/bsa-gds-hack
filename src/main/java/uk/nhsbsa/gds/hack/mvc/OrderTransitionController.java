@@ -52,26 +52,34 @@ public class OrderTransitionController {
     	
     	//return to base order list
     	LOGGER.info("Creating transition: {}", transition);
+    	String url;
     	OrderStatus newStatus = transitionMap.get(transition.getTarget());
     	if (newStatus != null) {
     		Order order = orderRepo.find(transition.getId());
     		if (order != null) {
-    			transition(order, newStatus);
+    			url = transition(order, newStatus);
+    		} else {
+    			throw new IllegalArgumentException("Unknown Order" + transition.getId());
     		}
+		} else {
+			throw new IllegalArgumentException("Unknown transition" + transition.getTarget());
     	}
-    	return "redirect:/orders";
+    	return "redirect:" + url;
     }
 
-	private void transition(Order order, OrderStatus newStatus) {
+	private String transition(Order order, OrderStatus newStatus) {
 		
+		String url = null;
 		switch (newStatus) {
 		case SUBMITTED:
-			orderService.pay(order);
+			url = orderService.pay(order);
 			break;
 
 		default:
+			url = "/orders";
 			break;
 		}
+		return url;
 	}
 
 }

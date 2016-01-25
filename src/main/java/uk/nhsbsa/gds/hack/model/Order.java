@@ -10,6 +10,11 @@ public class 	Order {
 	 * Unique ID for this order.
 	 */
     private String id;
+
+    /**
+     * Key to GOV.UK payment.
+     */
+    private String paymentId;
     
     /**
      * You can buy anything you want - just describe it.
@@ -63,12 +68,11 @@ public class 	Order {
 	public void setStatus(OrderStatus status) {
 		this.status = status;
 	}
-	
-	
 
-	@Override
-	public String toString() {
-		return "Order [id=" + id + "description=" + description + ", cost=" + cost + "]";
+	public String getPaymentId() {
+		return paymentId;
 	}
-
+	public void setPaymentId(String paymentId) {
+		this.paymentId = paymentId;
+	}
 }
