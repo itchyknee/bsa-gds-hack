@@ -31,6 +31,15 @@ public class GovpayConfig {
 		return headers;
 	}
 
+	@Bean(name="httpHeadersGet")
+	public HttpHeaders createHttpHeadersGet() {
+
+		HttpHeaders headers = new HttpHeaders();
+		auth(headers);
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		return headers;
+	}
+
 	private void auth(HttpHeaders headers) {
 		headers.add("authorization", "Bearer " + bearerToken);
 	}

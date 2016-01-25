@@ -14,7 +14,7 @@ public class 	Order {
     /**
      * Key to GOV.UK payment.
      */
-    private String paymentId;
+    private Integer paymentId;
     
     /**
      * You can buy anything you want - just describe it.
@@ -69,10 +69,10 @@ public class 	Order {
 		this.status = status;
 	}
 
-	public String getPaymentId() {
+	public Integer getPaymentId() {
 		return paymentId;
 	}
-	public void setPaymentId(String paymentId) {
+	public void setPaymentId(Integer paymentId) {
 		this.paymentId = paymentId;
 	}
 }
