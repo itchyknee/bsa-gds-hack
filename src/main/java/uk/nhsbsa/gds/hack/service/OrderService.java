@@ -22,6 +22,7 @@ public class OrderService implements IOrderService {
 		payment.setAmount(order.getCost());
 		payment.setDescription(order.getDescription());
 		payment.setReturnURL("http://localhost:8080/orders");
+		payment.setReference("my-ref");
 		paymentClient.create(payment);
 		
 		return null;
