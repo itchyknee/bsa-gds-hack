@@ -1,11 +1,13 @@
 package uk.nhsbsa.gds.hack.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 
 import uk.nhsbsa.gds.hack.govpay.PaymentClient;
 import uk.nhsbsa.gds.hack.model.Order;
 import uk.nhsbsa.gds.hack.model.PaymentRequest;
+import uk.nhsbsa.gds.hack.model.PaymentResponse;
 
 @Component
 public class OrderService implements IOrderService {
@@ -23,8 +25,9 @@ public class OrderService implements IOrderService {
 		payment.setDescription(order.getDescription());
 		payment.setReturnURL("http://localhost:8080/orders");
 		payment.setReference("my-ref");
-		paymentClient.create(payment);
+		PaymentResponse response = paymentClient.create(payment);
 		
-		return null;
+		Link nextUrl = response.getLink("next_url");
+		return nextUrl.getHref();
 	}
 }
