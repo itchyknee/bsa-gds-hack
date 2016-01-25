@@ -13,10 +13,12 @@ public class OrderService implements IOrderService {
 	@Autowired
 	PaymentClient paymentClient;
 	
-	public void pay(Order order) {
+	public String pay(Order order) {
 		
 		Payment payment = new Payment();
 		//TODO populate initial Payment object
 		paymentClient.create(payment);
+		
+		return null;
 	}
 }
