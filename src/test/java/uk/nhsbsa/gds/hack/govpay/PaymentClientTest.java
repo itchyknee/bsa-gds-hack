@@ -47,7 +47,7 @@ public class PaymentClientTest {
 	 */
 	@Test
 	public void testGetById() {
-		PaymentResponse paymentResponse = paymentClient.getById("108");
+		PaymentResponse paymentResponse = paymentClient.getById(108);
 		assertNotNull(paymentResponse);
 	}
 
@@ -59,12 +59,13 @@ public class PaymentClientTest {
 		PaymentRequest paymentRequest = getTestPaymentRequest();
 		PaymentResponse paymentResponse = paymentClient.create(paymentRequest);
 		assertNotNull(paymentResponse);
+		assertNotNull(paymentResponse.getLink("next_url"));
 	}
 	
 	private PaymentRequest getTestPaymentRequest() {
 		PaymentRequest paymentRequest = new PaymentRequest();
 		paymentRequest.setAmount(new BigDecimal(100).setScale(0, RoundingMode.HALF_UP));
-		paymentRequest.setAccountId(789);
+		paymentRequest.setAccountId(123);
 		paymentRequest.setDescription("Unit test");
 		paymentRequest.setReference("TEST"+random.nextInt(9999));
 		paymentRequest.setReturnURL("http://unittest.org.uk/something");
