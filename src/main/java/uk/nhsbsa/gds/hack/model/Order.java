@@ -4,17 +4,12 @@ import static uk.nhsbsa.gds.hack.model.OrderStatus.PENDING;
 
 import java.math.BigDecimal;
 
-public class Order {
+public class 	Order {
 
 	/**
 	 * Unique ID for this order.
 	 */
     private String id;
-
-    /**
-     * Key to GOV.UK payment.
-     */
-    private Payment payment;
     
     /**
      * You can buy anything you want - just describe it.
@@ -73,7 +68,7 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", payment=" + payment + ", description=" + description + ", cost=" + cost + "]";
+		return "Order [id=" + id + "description=" + description + ", cost=" + cost + "]";
 	}
 
 }
