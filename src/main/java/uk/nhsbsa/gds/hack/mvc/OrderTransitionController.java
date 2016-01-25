@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import uk.nhsbsa.gds.hack.data.IRepository;
 import uk.nhsbsa.gds.hack.model.Order;
+import uk.nhsbsa.gds.hack.model.OrderStatus;
 import uk.nhsbsa.gds.hack.model.OrderStatusTransition;
-import uk.nhsbsa.gds.hack.model.PaymentStatus;
+import uk.nhsbsa.gds.hack.service.IOrderService;
 
 /**
  * Controller responsible for handling order transitions.
@@ -31,16 +32,19 @@ public class OrderTransitionController {
 	/** Logger. */
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrderTransitionController.class);
 	
-	private Map<String, PaymentStatus> transitionMap = new HashMap<String, PaymentStatus>();
+	private Map<String, OrderStatus> transitionMap = new HashMap<String, OrderStatus>();
 	
 	@Autowired
 	@Qualifier("orderRepository")
 	private IRepository<Order, String> orderRepo;
 	
+	@Autowired
+	private IOrderService orderService;
+	
 	public OrderTransitionController() {
-		transitionMap.put("pay", PaymentStatus.SUBMITTED);
-		transitionMap.put("approve", PaymentStatus.APPROVED);
-		transitionMap.put("reject", PaymentStatus.REJECTED);
+		transitionMap.put("pay", OrderStatus.SUBMITTED);
+		transitionMap.put("approve", OrderStatus.APPROVED);
+		transitionMap.put("reject", OrderStatus.REJECTED);
 	}
 
     @RequestMapping(value="/orders/transition", method=POST)
@@ -48,14 +52,26 @@ public class OrderTransitionController {
     	
     	//return to base order list
     	LOGGER.info("Creating transition: {}", transition);
-    	PaymentStatus newStatus = transitionMap.get(transition.getTarget());
+    	OrderStatus newStatus = transitionMap.get(transition.getTarget());
     	if (newStatus != null) {
     		Order order = orderRepo.find(transition.getId());
     		if (order != null) {
-    			order.getPayment().setStatus(newStatus);
+    			transition(order, newStatus);
     		}
     	}
     	return "redirect:/orders";
     }
+
+	private void transition(Order order, OrderStatus newStatus) {
+		
+		switch (newStatus) {
+		case SUBMITTED:
+			orderService.pay(order);
+			break;
+
+		default:
+			break;
+		}
+	}
 
 }
